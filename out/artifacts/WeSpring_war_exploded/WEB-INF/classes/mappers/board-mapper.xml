@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nh.mapper.BoardMapper">
+    <select id="selectBoard" parameterType="String" resultType="BoardDto">
+        SELECT
+            id,
+            title,
+            content
+        from board
+        WHERE title=#{title} or content = #{content}
+    </select>
+    <select id="boardList" resultType="boardDto">
+        SELECT num , id , title , content,  date_format(board_date, '%y-%m-%d') as board_date  from board
+
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="searchType=='title' and keyword != null and keyword != '' ">
+                AND title like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType=='content' and keyword != null and keyword != '' ">
+                AND content like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType=='id' and keyword != null and keyword != '' ">
+                AND id like CONCAT('%', #{keyword}, '%')
+            </if>
+        </trim>
+
+    </select>
+
+        <insert id="insertBoard" parameterType="BoardDto">
+        INSERT INTO board(
+            id,
+            title,
+            content
+        ) values (
+                     #{id},
+                     #{title},
+                     #{content}
+                 )
+
+    </insert>
+
+    <select id="getBoardContents" parameterType="java.lang.Integer" resultType="com.nh.dto.BoardDto">
+        select
+            *
+        from
+            board
+        where
+            num =#{num}
+    </select>
+<update id="updateBoard" parameterType="BoardDto" >
+                        UPDATE board SET
+                         title=#{title},
+                         content=#{content},
+                         id=#{id}
+
+    WHERE num=#{num}
+
+</update>
+
+    <delete id="getBoardDelete" parameterType="java.lang.Integer" >
+    <![CDATA[
+    delete
+        from
+    board
+    where
+        num=#{num}
+    ]]>
+    </delete>
+
+
+
+
+
+</mapper>
