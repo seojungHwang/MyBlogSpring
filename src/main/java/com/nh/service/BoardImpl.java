@@ -30,8 +30,6 @@ public class BoardImpl implements BoardService {
         return boardDtoList;
     }
 
-
-
     @Override
     public BoardDto getBoardContents(int num) {
         return boardDao.getBoardContents(num);
@@ -44,10 +42,17 @@ public class BoardImpl implements BoardService {
     public void updateBoard(BoardDto boardDto) {
         boardDao.updateBoard(boardDto);
     }
+
     @Override
     public BoardDto getBoardDelete(int num){
         boardDao.getBoardDelete(num);
         return null;
     }
+
+    @Override
+    public int totalBoardCount(BoardDto boardDto){
+        return boardDao.totalBoardCount(boardDto);
+    }
+
 }
 

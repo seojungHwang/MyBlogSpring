@@ -7,6 +7,7 @@ import org.eclipse.jface.text.templates.GlobalTemplateVariables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -29,9 +30,9 @@ public class UserDao {
     @Autowired
     private SqlSession sqlSession;
 
-    public UserDto selectMember(final String id) {
+    public UserDto selectMember(HashMap<String, String> map) {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-        UserDto userDto = mapper.selectUser(id);
+        UserDto userDto = mapper.selectUser(map);
         return userDto;
     }
     public List<UserDto> allUsers() {
@@ -43,5 +44,9 @@ public class UserDao {
     public int insertUser(UserDto userDto) {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         return mapper.insertUser(userDto);
+    }
+    public int idCheck(String userId) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        return mapper.idCheck(userId);
     }
 }

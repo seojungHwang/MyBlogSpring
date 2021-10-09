@@ -23,14 +23,39 @@ public class BoardController {
 
 
     @GetMapping(value = "/board/list")
-    public String boardList(BoardDto boardDto,Model model) {
-        List<BoardDto> boardDtoList = boardService.boardList(boardDto);
-        for (BoardDto list : boardDtoList) {
-            System.out.println(list);
-        }
-        model.addAttribute("boardList", boardDtoList);
+    public String boardList(
+            BoardDto boardDto,
+            Model model
+            ,@RequestParam(name = "currentPage" , defaultValue = "0") int currentPage) {
+
+        int pageData = 5;//한 페이지당 보여질 데이터 개수 (이건 내가 그냥 막 정하면됩니당)
+        int offset = currentPage*pageData; //전체 데이터(totalCount)에서 몇번째부터 시작점으로 잡을지 정할때 필요(예를들어 1번 페이지는 0번데이터부터  , 2번페이지는 5번데이터부터)_
+        int totalBoardCount = boardService.totalBoardCount(boardDto);// 총 게시글 수
+        int pageCount = (totalBoardCount/pageData) + ((totalBoardCount%pageData) > 0 ? 1:0); //총 페이지 버튼의 개수
+
+        //------------------------------------------------------2021-10-02 추가내용
+        //페이지 번호가 한번에 몇개부터 몇개씩 보일것인지 !
+        int pageMaxNum = 5; // 한번에 페이지 버튼이 몇개씩 보일것인가에 대한 값이다.
+        int start = Math.max(1 , currentPage/pageMaxNum*pageMaxNum+1);//페이지 번호를 몇번부터 표시할건지
+        int end = Math.min(pageCount , start+pageMaxNum-1);//페이지 번호를 몇번까지 표시할건지
+        //------------------------------------------------------//
+
+        boardDto.setOffset(offset);
+        boardDto.setLimit(pageData);
+        System.out.println("boardDto = " + boardDto);
+
+        List<BoardDto> boardList = boardService.boardList(boardDto);
+
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("currentPage",currentPage); //현재 페이지(화면에서 페이지버튼 눌린표시랑 안눌린표시 , 이전버튼 , 다음버튼 활성화 비활성화 할때 필요)
+        model.addAttribute("pageCount",pageCount); //총 페이지수(화면에서 페이지 버튼 개수 만들때 필요 , 이전버튼 , 다음버튼 활성화 비활성화 할때 필요)
+        model.addAttribute("start", start);//화면에서 페이지 번호 시작점을 나타낼 수 있다.
+        model.addAttribute("end", end);//화면에서 페이지 번호 끝점을 나타낼 수 있다.
+
         return "board/board";
     }
+
+
 
     @GetMapping("/board/post")
     public String getWrite() {
@@ -100,11 +125,12 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/board/delete", method = RequestMethod.GET)
-    public String delet(@RequestParam("num") int num, Model model) {
+    public String delete(@RequestParam("num") int num, Model model) {
         BoardDto boardDelete = boardService.getBoardDelete(num);
 
         model.addAttribute("boardContents", boardDelete);
         return "redirect:/board/list";
         /* redirect사용시 model은 소멸됨 */
     }
+
 }

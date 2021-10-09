@@ -47,4 +47,9 @@ public class BoardDao {
         mapper.getBoardDelete(num);
     }
 
+    public int totalBoardCount(BoardDto boardDto){
+        BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+      return mapper.totalBoardCount(boardDto);
+    }
+
 }

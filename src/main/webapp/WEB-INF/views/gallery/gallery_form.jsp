@@ -11,9 +11,13 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="/gallery/new" method="post" enctype="multipart/form-data">
-        <input type="file" multiple="multiple" name="files"/>
-        <button>전송</button>
-    </form>
+<form action="/gallery/new" method="post" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="제목을 입력해주세요"/>
+    <input type="text" name="userId" value="${sessionScope.user_info.userId}" style="display: none"/>
+    <input type="file" multiple="multiple" name="files"/>
+    <button type="submit">전송</button>
+</form>
+    <a href="/gallery/list">목록</a>
+
 </body>
 </html>

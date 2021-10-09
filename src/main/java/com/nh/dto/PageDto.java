@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class PaginationDto {
+public class PageDto {
     private int pageIndex; //현재 페이지
     private int pageUnit; //페이지 개수
     private int pageSize; //페이지 사이즈

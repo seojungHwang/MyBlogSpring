@@ -2,6 +2,7 @@ package com.nh.service;
 
 import com.nh.dto.UserDto;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -14,12 +15,14 @@ public interface UserService {
 
     */
     //유저조회기능
-    public UserDto selectUser(String id);
+    public UserDto selectUser(HashMap<String, String> map);
 
     //모든 유저 조회기능
     public List<UserDto> allUsers();
 
     //회원가입
     public int insertUser(UserDto userDto);
+
+    public int idCheck(String userId);
 
 }

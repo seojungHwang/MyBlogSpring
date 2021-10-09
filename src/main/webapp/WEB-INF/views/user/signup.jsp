@@ -10,19 +10,19 @@
 <head>
     <link rel="stylesheet" type="text/css" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/signup.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <title>Title</title>
 </head>
 <body>
 <h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="/signup/new" method="post" id="sinh_up_form"> <%-- form 쓰기 할떄 씀, 회원가입 , 글쓰기 등  --%>
+        <form action="/signup/new" method="post" id="sign_up_form"> <%-- form 쓰기 할떄 씀, 회원가입 , 글쓰기 등  --%>
             <h1>Create Account</h1>
             <div class="social-container">
-                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                <%--form 태그 안에 버튼이 있으면 타입은 항상 버튼 타입! 왜냐면 전송 되어버림(페이지 이동됨)--%>
+               <button type="button" id="btn" class="btn">중복체크</button>
             </div>
             <span>or use your email for registration</span>
             <input type="id" placeholder="아이디를 입력하세요" id="user_id" name = "userId"/>
@@ -38,11 +38,11 @@
         프론트로 연결하기 위함(검사 위해)
          자바에서 쓰는 자원의 양보다 프로트에서 쓰는 자원의 양이 더 효율적임(그래서 유효성 검사)
          --%>
-            <button type="button" id="sing_btn">Sign Up</button>
+            <button type="button" id="sign_btn">Sign Up</button>
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form action="/signin/new" method="post" id="sinh_in_form">
+        <form action="/signin/new" method="post" id="sign_in_form">
             <h1>Sign in</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -81,6 +81,7 @@
     </p>
 </footer>
 <script type="text/javascript">
+    var check_flag = false;
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
@@ -93,30 +94,72 @@
         container.classList.remove("right-panel-active");
     });
 /* validation (유효성 검사)  제이쿼리*/
-    $("#sing_btn").on('click', function (){
-       let user_id = $("#user_id").val();
-       let user_pass = $("#user_pass").val();
-       let user_name = $("#user_name").val();
+    $("#sign_btn").on('click', function () {
+        if(!check_flag) {
+            alert("중복체크를 해주세요!");
+            return ;
+        }
 
-       if (user_id=="") {
-           alert("id를 입력해주세요");
-           return;
-       }else if (user_pass ==""){
+        let check = RegExp(/^[a-zA-Z0-9]{4,12}$/); //아이디, 비번 정규표현식
+        let checkName = RegExp(/^[가-힣]+$/);
+
+        if ($("#user_id").val() == "") {
+            alert("id를 입력해주세요");
+            $("#id").focus();
+            return false;
+        }
+        if (!check.test($("#user_id").val())){
+            alert("id는 4~12자리 영문 + 숫자 조합으로 입력해주세요"); $("#id").val("");
+            $("#id").focus();
+            return false;
+        }
+        if ($("#user_pass").val() ==""){
            alert("비밀번호를 입력해주세요");
-           return;
-       }else if (user_name == ""){
+            $("#password").focus();
+            return false;
+        }
+        if (!check.test($("#user_pass").val())){
+            alert("비밀번호는 4~12자리 영문 + 숫자 조합으로 입력해주세요"); $("#user_pass").val("");
+            $("#user_pass").focus();
+            return false;
+        }
+         if ($("#user_name").val() == ""){
            alert("이름을 입력해주세요");
            return;
        }
+        if (!checkName.test($("#user_name").val())){
+            alert("한글 이름으로 입력해주세요"); $("#user_name").val("");
+            $("#user_name").focus();
+            return false;
+        }
        if(confirm("가입하시겠습니까?")){
-           $("#sinh_up_form").submit();
+           $.ajax({
+               type: 'POST',
+               url: "/signup/new",
+               data: {"userId" : $("#user_id").val(),
+                   "userPass" : $("#user_pass").val() ,
+                   "userName":$("#user_name").val() ,
+                   "gender":$('input[name="gender"]').val()},
+               success: function (result){
+                   console.log(result);
+                   if (result=='ok'){
+                       alert("가입이 완료되셨습니다!");
+                       window.location.href="/";
+                   }else {
+                       alert("회원가입에 실패하셨습니다 관리자에게 문의하세여");
+                   }
+               },
+               error:function(request,status,error){
+                   alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+               }
+           });
         }
     });
     // function checkInputs() {
     //     const idCheck = user_id.value().trim();
     //     const passCheck = user_pass.value().trim();
     // }
-/*제이쿼리*/
+/*제이쿼리*/ //아이디 존재 확인
     $("#sign_in_btn").on('click', function (){
         let user_id = $("#user_id2").val();
         let user_pass = $("#user_pass2").val();
@@ -128,25 +171,49 @@
             alert("비밀번호를 입력해주세요");
             return;
         }
-
-
         $.ajax({
             type: 'POST',
             url: "/signin/new",
             data: {"userId" : user_id, "userPass" : user_pass},
             success: function (result){
+                console.log(result);
                 if (result=='ok'){
                     window.location.href="/";
                 }else {
                     alert("입력하신 정보로 조회되는 회원이 없습니다");
                 }
             },
-            error: function (error){
-                console.log("ERROR : ", error);
+            error:function(request,status,error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });
-
     });
+
+    //중복체크
+    $("#btn").on("click", function (){
+        $.ajax({
+            type: 'POST',
+            url: "/idCheck",
+            data: {"userId" : $("#user_id").val()},
+            success: function (result){
+                console.log(result);
+                if (result=='ok'){
+                   alert("중복된 아이디 입니다.")
+                    check_flag = false;
+                }else {
+                    alert("사용가능한 아이디 입니다.");
+                    check_flag = true;
+                }
+            },
+            error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
+    });
+
+    $("#user_id").on("change keyup paste" , function () {
+        check_flag = false;
+    })
 
 </script>
 </body>

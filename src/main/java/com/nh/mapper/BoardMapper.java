@@ -1,6 +1,7 @@
 package com.nh.mapper;
 
 import com.nh.dto.BoardDto;
+import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
@@ -12,12 +13,12 @@ public interface BoardMapper {
 
     public List<BoardDto> boardList(BoardDto boardDto);
 
-
     public BoardDto getBoardContents(int num);
 
     public void updateBoard(BoardDto boardDto);
 
     public void getBoardDelete(int boardDto);
 
+    public int totalBoardCount(BoardDto boardDto);
 
 }

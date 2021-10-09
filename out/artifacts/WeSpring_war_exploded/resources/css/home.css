@@ -50,3 +50,8 @@ a:before {
 }
 
 
+h3#login_info{
+    position: absolute;
+    top: 1%;
+    left: 90%;
+}

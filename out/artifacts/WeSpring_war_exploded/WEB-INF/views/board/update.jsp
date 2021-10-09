@@ -44,8 +44,9 @@
               <tr>
                 <th class="active" >작성자</th>
                 <td class="form-inline">
-                  <input type="text" id="id"
+                  <input type="hidden" id="id"
                     name="id" class="form-control" style="width: 200px" value="${boardContents.id}"/>
+                  ${boardContents.id}
                 </td>
               </tr>
               <tr>
@@ -66,7 +67,8 @@
           </div>
           <div style="margin-left:1px;">
             <button type="submit" class="btn btn-primary">수정</button>
-            <a class="btn btn-danger pull-right" href="/board/read?num=${boardContents.num}">취소</a>
+            <a class="btn btn-danger pull-right" href="/board/read?id=${boardContents.id}">취소</a>
+          </div>
           </div>
         </form>
       </div>
