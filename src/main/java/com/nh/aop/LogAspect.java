@@ -10,11 +10,12 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-@Aspect
+@Aspect //pom.xml에 라이브러리 필요
 public class LogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
+    //aop를 적용할 범위설정
     @Around("execution(* com.nh..*Controller.*(..))"
             +" || execution(* com.nh..*service..*Impl.*(..))"
     )
