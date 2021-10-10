@@ -33,12 +33,14 @@
             <version>${org.springframework-version}</version>
         </dependency>
 
+        <!--AOP 쓰는데 필요-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>1.9.7</version>
         </dependency>
 
+        <!--AOP 쓰는데 필요-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjtools</artifactId>

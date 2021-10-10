@@ -6,7 +6,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.nh" level="info"/>
+    <logger name="com.nh" level="off"/>
 <!--    <logger name="kr.or.connect" level="debug"/>-->
 
     <root level="debug">

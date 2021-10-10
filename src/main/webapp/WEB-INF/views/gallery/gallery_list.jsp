@@ -32,14 +32,16 @@
                 <li>
                     <c:forEach var="i"  begin="0" end="${gallery.photoDtoList.size()-1}" step="1">
                         <c:choose>
+                            <%--해당글의 첫번째 사진이라면--%>
                             <c:when test="${i==0}">
-                                <a href="/images/${gallery.photoDtoList.get(i).newName}" data-toggle="lightbox" data-gallery="gallery${gallery.galleryNo}">
-                                    <img src="/images/${gallery.photoDtoList.get(i).newName}" alt="">
+                                <a href="/images/${gallery.photoDtoList.get(i).newName}?image=250" data-toggle="lightbox" data-title="${gallery.title}"  data-footer="my photo.."   data-gallery="gallery${gallery.galleryNo}">
+                                    <img src="/images/${gallery.photoDtoList.get(i).newName}?image=250" alt="" class="img-fluid" >
                                 </a>
                             </c:when>
+                            <%--해당글의 첫번째 사진이 아니라면--%>
                             <c:otherwise>
-                                <a href="/images/${gallery.photoDtoList.get(i).newName}" data-toggle="lightbox" data-gallery="gallery${gallery.galleryNo}" style="display: none">
-                                    <img src="/images/${gallery.photoDtoList.get(i).newName}" alt="">
+                                <a href="/images/${gallery.photoDtoList.get(i).newName}?image=250" data-toggle="lightbox" data-title="${gallery.title}" data-footer="my photo.."   data-gallery="gallery${gallery.galleryNo}" style="display: none">
+                                    <img src="/images/${gallery.photoDtoList.get(i).newName}?image=250" alt="" class="img-fluid">
                                 </a>
                             </c:otherwise>
                         </c:choose>
@@ -65,8 +67,14 @@
     });
 
     $(document).on("click", '[data-toggle="lightbox"]', function(event) {
+        var option ={
+            loadingMessage:'Loading...',
+            maxWidth:1500,
+            maxHeight: 800
+        }
         event.preventDefault();
-        $(this).ekkoLightbox();
+
+        $(this).ekkoLightbox(option);
     });
 </script>
 </body>
