@@ -15,11 +15,11 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
+<h2><a href="/" style="font-size: 1.5em;">Go Back Home</a></h2>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form action="/signup/new" method="post" id="sign_up_form"> <%-- form 쓰기 할떄 씀, 회원가입 , 글쓰기 등  --%>
-            <h1>Create Account</h1>
+            <h1 style="color: #444;">Create Account</h1>
             <div class="social-container">
                 <%--form 태그 안에 버튼이 있으면 타입은 항상 버튼 타입! 왜냐면 전송 되어버림(페이지 이동됨)--%>
                <button type="button" id="btn" class="btn">중복체크</button>
@@ -43,11 +43,9 @@
     </div>
     <div class="form-container sign-in-container">
         <form action="/signin/new" method="post" id="sign_in_form">
-            <h1>Sign in</h1>
+            <h1 style="color: #444;">Sign in</h1>
             <div class="social-container">
-                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+
             </div>
             <span>or use your account</span>
             <input type="text" placeholder="아이디를 입력하세요" id="user_id2" name = "userId"/>
@@ -72,14 +70,14 @@
     </div>
 </div>
 
-<footer>
+<%--<footer>
     <p>
         Created with <i class="fa fa-heart"></i> by
         <a target="_blank" href="https://florin-pop.com">Florin Pop</a>
         - Read how I created this and how you can join the challenge
         <a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
     </p>
-</footer>
+</footer>--%>
 <script type="text/javascript">
     var check_flag = false;
     const signUpButton = document.getElementById('signUp');

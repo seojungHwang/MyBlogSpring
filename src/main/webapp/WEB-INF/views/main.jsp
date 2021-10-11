@@ -14,13 +14,13 @@
 
 </head>
 <body>
-<c:choose> <%-- 문법의 하나로써 swich case 할려고 이렇게 써야됨 / jsp 라이브러리 --%>
-  <c:when test="${sessionScope.user_info != null}"><%--  if --%>
-    <h3 id="login_info">${sessionScope.user_info.userName} 님</h3>
-  </c:when>  <%--  if --%>
-  <c:otherwise><%-- else --%>
-  </c:otherwise> <%-- else --%>
-</c:choose>
+<%--<c:choose> &lt;%&ndash; 문법의 하나로써 swich case 할려고 이렇게 써야됨 / jsp 라이브러리 &ndash;%&gt;--%>
+<%--  <c:when test="${sessionScope.user_info != null}">&lt;%&ndash;  if &ndash;%&gt;--%>
+<%--    <h3 id="login_info">${sessionScope.user_info.userName} 님</h3>--%>
+<%--  </c:when>  &lt;%&ndash;  if &ndash;%&gt;--%>
+<%--  <c:otherwise>&lt;%&ndash; else &ndash;%&gt;--%>
+<%--  </c:otherwise> &lt;%&ndash; else &ndash;%&gt;--%>
+<%--</c:choose>--%>
 
 <ul>  <%-- 목록을 나타내는 html (li, a랑 셋뚜셋뚜라고 보면됨--%>
   <c:choose>
@@ -30,7 +30,7 @@
 
   <li><a href="/board/list" data-content="Board">Board</a></li>
   <li><a href="/gallery/list" data-content="Gallery">Gallery</a></li>
-  <li><a href="#" data-content="Blog">Blog</a></li>
+  <li><a href="https://seojungpoem.tistory.com/" data-content="Blog">Blog</a></li>
 </ul>
 
 

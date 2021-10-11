@@ -19,25 +19,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet" href="/resources/css/board.css" >
 </head>
-<body style="text-align: center;">
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 
+<body style="text-align: center;">
 
 <section>
     <div id="main">
         <h1>게시판</h1>
     </div>
-    <div class="search">
-        <div class="searchBar">
-            <select id="searchType" name="searchType">
-                <option value="title">제목</option>
-                <option value="content">내용</option>
-                <option value="id">작성자</option>
-            </select>
-            <input type="text" id="keyword" name="keyword" value="${param.keyword}" style="width: 300px; height: 40px; color: #0f0f0f"
-                   placeholder="검색어를 입력하세요"/>
-            <button  id="btnSearch" name="btnSearch">검색</button>
-        </div>
-    </div>
+
     <div class="container">
         <!-- Table -->
         <table class="table table-striped" id="boardtable" cellspacing="0">
@@ -45,7 +35,6 @@
             <tr>
                 <th>번호</th>
                 <th>제목</th>
-                <th>내용</th>
                 <th>작성자</th>
                 <th>날짜</th>
             </tr>
@@ -58,15 +47,15 @@
                             <c:out value="${board.title}" />
                         </a>
                     </td>
-                    <td><c:out value="${board.content}" /></td>
                     <td><c:out value="${board.id}" /></td>
                     <td><c:out value="${board.board_date}" /></td>
                 </tr>
             </c:forEach>
         </table>
         <hr/>
-        <a id="btn" class="btn btn-danger pull-right" href="/board/post">글쓰기</a>
-
+<%--        <a id="btn" class="btn btn-danger pull-right" href="/board/post" onclick="location.href='/board/post'">글쓰기</a>--%>
+        <button id="write_btn" type="button" onclick="location.href='/board/post'">글쓰기</button>
+        <%--페이징--%>
         <c:choose>
             <c:when test="${boardList.size() > 0}">
                 <nav aria-label="Page navigation example">
@@ -116,6 +105,19 @@
 
     </div>
 </section>
+
+<div class="search">
+    <div class="searchBar">
+        <select id="searchType" name="searchType">
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+            <option value="id">작성자</option>
+        </select>
+        <input type="text" id="keyword" name="keyword" value="${param.keyword}" style="width: 300px; height: 40px; color: #0f0f0f"
+               placeholder="검색어를 입력하세요"/>
+        <button  id="btnSearch" name="btnSearch">검색</button>
+    </div>
+</div>
 
 
 

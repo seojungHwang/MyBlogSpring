@@ -14,4 +14,15 @@ public class GalleryDto {
     private String title;
     private String WriteDate;
     private List<PhotoDto> photoDtoList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "GalleryDto{" +
+                "galleryNo=" + galleryNo +
+                ", userId='" + userId + '\'' +
+                ", title='" + title + '\'' +
+                ", WriteDate='" + WriteDate + '\'' +
+                ", photoDtoList=" + photoDtoList +
+                '}';
+    }
 }
