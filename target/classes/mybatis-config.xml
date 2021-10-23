@@ -8,5 +8,6 @@
         <typeAlias alias="boardDto" type="com.nh.dto.BoardDto"/>
         <typeAlias alias="galleryDto" type="com.nh.dto.GalleryDto"/>
         <typeAlias alias="photoDto" type="com.nh.dto.PhotoDto"/>
+        <typeAlias alias="CommentsDto" type="com.nh.dto.CommentsDto"/>
     </typeAliases>
 </configuration>

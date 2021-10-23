@@ -2,6 +2,7 @@ package com.nh.service;
 
 import com.nh.dao.BoardDao;
 import com.nh.dto.BoardDto;
+import com.nh.dto.CommentsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,5 @@ public class BoardImpl implements BoardService {
     public int totalBoardCount(BoardDto boardDto){
         return boardDao.totalBoardCount(boardDto);
     }
-
 }
 

@@ -78,30 +78,9 @@
         <br>
         <br>
         <br>
-        <div class="card mb-2">
-        <div class="card-header bg-light">
-        <i class="fa fa-comment fa"></i> REPLY
-        </div>
-        <div class="card-body">
-        <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-        <div class="form-inline mb-2">
-        <label for="replyId"><i class="fa fa-user-circle-o fa-2x"></i></label>
-        <input type="text" class="form-control ml-2" placeholder="Enter yourId" id="replyId">
-        <label for="replyPassword" class="ml-4"><i class="fa fa-unlock-alt fa-2x"></i></label>
-        <input type="password" class="form-control ml-2" placeholder="Enter password" id="replyPassword">
-        </div>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-dark mt-3" onClick="javascript:addReply();">post reply</button>
-        </li>
-        </ul>
-        </div>
-        </div>
-        </form>
-        </div>
-        </div>
-        </div>
-        </div>
+            </form>
+
+
         <script type="text/javascript">
         $(document).ready(function () {
         var msg = "${msg}"
@@ -117,8 +96,9 @@
         }else {
         location.href="${path}/board/delete.do?num=${boardContents.num}";
         /* .do 앞에 있는 url로 매핑을 해준다(있어도되고 없어도 되지만 다른 사람이 보기 헷갈리기에 선호하지 않음) */
+            }
         }
-        }
+
         </script>
         </body>
         </html>

@@ -2,6 +2,7 @@ package com.nh.controller;
 
 import com.nh.aop.LogExecutionTime;
 import com.nh.dto.BoardDto;
+import com.nh.dto.CommentsDto;
 import com.nh.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class BoardController {
     @GetMapping("/board/new")
     public String getBoard() {
         return "board/board"; //jsp 파일명
-    }
+    } //getBoard
 
 
     @GetMapping(value = "/board/list")
@@ -53,14 +54,12 @@ public class BoardController {
         model.addAttribute("end", end);//화면에서 페이지 번호 끝점을 나타낼 수 있다.
 
         return "board/board";
-    }
-
-
+    } //boardList
 
     @GetMapping("/board/post")
     public String getWrite() {
         return "board/board_post"; //jsp 파일명
-    }
+    } //getWrite
 
 
     @PostMapping("/board/post")
@@ -71,7 +70,7 @@ public class BoardController {
         System.out.println("날짜 = " + boardDto.getBoard_date());
         boardService.insertBoard(boardDto);
         return "redirect:/board/list";
-    }
+    } //postWrite
 
     @LogExecutionTime
     @RequestMapping(value = "/board/{id}")
@@ -82,7 +81,8 @@ public class BoardController {
         System.out.println("제목 = " + boardDto.getTitle());
         model.addAttribute("board", boardDto);
         return "board/board";
-    }
+    } //boardWrite
+
 
     @RequestMapping(value = "/board/read", method = RequestMethod.GET)
     public String read(@RequestParam("num") int num, Model model) {
@@ -99,7 +99,7 @@ public class BoardController {
         return "board/read";
     }
         */
-    }
+    } //read
 
     @RequestMapping(value = "/board/update", method = RequestMethod.GET)
     public String update(@RequestParam("num") int num, Model model) {
@@ -116,13 +116,13 @@ public class BoardController {
 
         return은 부른곳에 돌려주겠다!
          */
-    }
+    } //update
 
     @RequestMapping(value = "/board/postUpdate", method = RequestMethod.POST)
     public String postUpdate(BoardDto boardDto) {
         boardService.updateBoard(boardDto);
         return "redirect:/board/list";
-    }
+    } //postUpdate
 
     @RequestMapping(value = "/board/delete", method = RequestMethod.GET)
     public String delete(@RequestParam("num") int num, Model model) {
@@ -131,6 +131,5 @@ public class BoardController {
         model.addAttribute("boardContents", boardDelete);
         return "redirect:/board/list";
         /* redirect사용시 model은 소멸됨 */
-    }
-
-}
+    } //delete
+} //end class
