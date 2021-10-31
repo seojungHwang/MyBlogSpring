@@ -89,7 +89,5 @@ public class GalleryController {
         return Integer.toString(returnVal);
     }
 
-
-
-}
+} //end class
 
