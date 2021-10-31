@@ -1,7 +1,6 @@
 package com.nh.service;
 
 import com.nh.dto.BoardDto;
-import com.nh.dto.CommentsDto;
 
 import java.util.List;
 

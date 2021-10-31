@@ -2,7 +2,6 @@ package com.nh.service;
 
 import com.nh.dao.BoardDao;
 import com.nh.dto.BoardDto;
-import com.nh.dto.CommentsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

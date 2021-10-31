@@ -2,7 +2,6 @@ package com.nh.controller;
 
 import com.nh.aop.LogExecutionTime;
 import com.nh.dto.BoardDto;
-import com.nh.dto.CommentsDto;
 import com.nh.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -124,7 +123,7 @@ public class BoardController {
         return "redirect:/board/list";
     } //postUpdate
 
-    @RequestMapping(value = "/board/delete", method = RequestMethod.GET)
+    @GetMapping("/board/delete")
     public String delete(@RequestParam("num") int num, Model model) {
         BoardDto boardDelete = boardService.getBoardDelete(num);
 

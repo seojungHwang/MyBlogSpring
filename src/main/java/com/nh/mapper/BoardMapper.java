@@ -1,8 +1,6 @@
 package com.nh.mapper;
 
 import com.nh.dto.BoardDto;
-import com.nh.dto.CommentsDto;
-import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;

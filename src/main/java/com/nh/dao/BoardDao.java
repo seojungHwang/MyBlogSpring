@@ -1,7 +1,6 @@
 package com.nh.dao;
 
 import com.nh.dto.BoardDto;
-import com.nh.dto.CommentsDto;
 import com.nh.mapper.BoardMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
