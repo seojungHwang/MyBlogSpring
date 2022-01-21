@@ -131,7 +131,7 @@
             url = url + "&keyword=" + $('#keyword').val();
             location.href = url;
             console.log(url);
-            //멍텅구리 바보 *2*4
+          
         });
     });
 
